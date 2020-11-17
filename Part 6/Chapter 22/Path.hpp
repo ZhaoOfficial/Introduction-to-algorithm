@@ -1,9 +1,5 @@
-//
-// Created by Administrator on 2018/9/11.
-//
-
-#ifndef GRAPHBASICS_PATH_H
-#define GRAPHBASICS_PATH_H
+#ifndef GRAPHBASICS_PATH_HPP
+#define GRAPHBASICS_PATH_HPP
 
 #include <stack>
 #include <iostream>
@@ -98,4 +94,4 @@ public:
 
 };
 
-#endif //GRAPHBASICS_PATH_H
+#endif //GRAPHBASICS_PATH_HPP

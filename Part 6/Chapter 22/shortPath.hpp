@@ -1,9 +1,5 @@
-//
-// Created by Administrator on 2018/9/12.
-//
-
-#ifndef GRAPHBASICS_SHORTPATH_H
-#define GRAPHBASICS_SHORTPATH_H
+#ifndef GRAPHBASICS_SHORTPATH_HPP
+#define GRAPHBASICS_SHORTPATH_HPP
 
 #include <iostream>
 #include <cassert>
@@ -120,4 +116,4 @@ public:
 };
 
 
-#endif //GRAPHBASICS_SHORTPATH_H
+#endif //GRAPHBASICS_SHORTPATH_HPP

@@ -1,0 +1,123 @@
+#ifndef GRAPHBASICS_DENSEGRAPH_HPP
+#define GRAPHBASICS_DENSEGRAPH_HPP
+
+#include <cassert>
+#include <iostream>
+#include <vector>
+#include "Edge.hpp"
+
+using std::cout;
+using std::endl;
+using std::vector;
+using std::ostream;
+
+namespace MyGraph {
+
+    // represents by adjacent matrix
+    template<typename T>
+    class DenseGraph {
+    private:
+        int numOfVertices, numOfEdges;
+        bool directed;
+        // the adjacent matrix
+        vector<vector<Edge<T>*>> adjacentMatrix;
+    public:
+        DenseGraph(int numOfVertices, bool directed) : numOfVertices(numOfVertices), directed(directed), numOfEdges(0) {
+            adjacentMatrix = vector<vector<Edge<T>* >>(numOfVertices, vector<Edge<T> *>(numOfVertices, nullptr));
+        }
+
+        ~DenseGraph() {
+            for (int i = 0; i < numOfVertices; i++) {
+                for (int j = 0; j < numOfVertices; j++) {
+                    if (adjacentMatrix[i][j]) {
+                        delete adjacentMatrix[i][j];
+                    }
+                }
+            }
+        }
+
+        int V() {
+            return numOfVertices;
+        };
+
+        int E() {
+            return numOfEdges;
+        };
+
+        void addEdge(int startIndex, int endIndex, T weight) {
+            assert(startIndex >= 0 && startIndex < numOfVertices);
+            assert(endIndex >= 0 && endIndex < numOfVertices);
+
+            // if there is an edge, the we update it
+            if (this->hasEdge(startIndex, endIndex)) {
+                adjacentMatrix[startIndex][endIndex]->setWeight(weight);
+                if (startIndex != endIndex && !this->directed) {
+                    adjacentMatrix[endIndex][startIndex]->setWeight(weight);
+                }
+                return;
+            }
+
+            //add new edge
+            adjacentMatrix[startIndex][endIndex] = new Edge<T>(startIndex, endIndex, weight);
+            if (startIndex != endIndex && !this->directed) {
+                adjacentMatrix[endIndex][startIndex] = new Edge<T>(endIndex, startIndex, weight);
+            }
+            this->numOfEdges++;
+        }
+
+        bool hasEdge(int startIndex, int endIndex) {
+            assert(startIndex >= 0 && startIndex < numOfVertices);
+            assert(endIndex >= 0 && endIndex < numOfVertices);
+
+            return adjacentMatrix[startIndex][endIndex] != nullptr;
+        }
+
+        void printGraph() {
+            for (int i = 0; i < numOfVertices; i++) {
+                for (int j = 0; j < numOfVertices; j++) {
+                    if (adjacentMatrix[i][j]) {
+                        cout << adjacentMatrix[i][j]->weight() << "\t";
+                    }
+                    else {
+                        cout << "NAN\t";
+                    }
+                }
+                cout << endl;
+            }
+        }
+
+        class adjIterator {
+        private:
+            DenseGraph& graph;
+            int vertex;
+
+        public:
+            adjIterator(DenseGraph& graph, int vertex) : graph(graph), vertex(vertex) {
+                assert(vertex >= 0 && vertex < graph.numOfVertices);
+            }
+
+            ~adjIterator() {};
+
+            // since the first element of one particular row is not always valid,
+            // then we need to find the first valid element
+            auto begin() {
+                auto it = graph.adjacentMatrix[vertex].begin();
+                next(it);
+                return it;
+            }
+
+            auto end() {
+                return graph.adjacentMatrix[vertex].end();
+            }
+
+            void next(decltype(graph.adjacentMatrix[vertex].begin())& it) {
+                it++;
+                while (it != graph.adjacentMatrix[vertex].end() && *it == nullptr) {
+                    it++;
+                }
+            }
+        };
+    };
+};
+
+#endif //GRAPHBASICS_DENSEGRAPH_HPP

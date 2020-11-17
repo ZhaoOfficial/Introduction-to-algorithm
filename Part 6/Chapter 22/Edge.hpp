@@ -1,5 +1,5 @@
-#ifndef GRAPHBASICS_EDGE_H
-#define GRAPHBASICS_EDGE_H
+#ifndef GRAPHBASICS_EDGE_HPP
+#define GRAPHBASICS_EDGE_HPP
 
 #include <iostream>
 #include <cassert>
@@ -24,11 +24,11 @@ namespace MyGraph {
 
         virtual ~Edge() {}
 
-        int start() const {
+        int startPoint() const {
             return this->Start;
         }
 
-        int end() const {
+        int endPoint() const {
             return this->End;
         }
 
@@ -76,4 +76,4 @@ namespace MyGraph {
     };
 };
 
-#endif // GRAPHBASICS_EDGE_H
+#endif // GRAPHBASICS_EDGE_HPP
