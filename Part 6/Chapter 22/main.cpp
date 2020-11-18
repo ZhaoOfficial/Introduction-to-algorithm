@@ -61,10 +61,12 @@ int main() {
     Traverse<SparseGraph<double>> traverseSparseGraph(sparseGraph, 0);
     traverseSparseGraph.depthFirstSearch();
     traverseSparseGraph.breadthFirstSearch();
+    traverseSparseGraph.path(19);
 
     Traverse<DenseGraph<double>> traverseDenseGraph(denseGraph, 0);
     traverseDenseGraph.depthFirstSearch();
     traverseDenseGraph.breadthFirstSearch();
+    traverseDenseGraph.path(19);
 
     return 0;
 }
