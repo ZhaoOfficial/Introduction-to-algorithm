@@ -36,13 +36,17 @@ namespace MyGraph {
             }
         }
 
-        int V() {
+        int V() const {
             return numOfVertices;
         };
 
-        int E() {
+        int E() const {
             return numOfEdges;
         };
+
+        bool isDirected() const {
+            return directed;
+        }
 
         void addEdge(int startIndex, int endIndex, T weight) {
             assert(startIndex >= 0 && startIndex < numOfVertices);
