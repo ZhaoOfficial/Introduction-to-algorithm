@@ -25,7 +25,7 @@ public:
     DisjointSet() : head(nullptr), tail(nullptr) {}
     ~DisjointSet() {}
 
-    void make_set(T value) {
+    void MakeSet(T value) {
         node<T>* new_node = new node<T>(value);
         new_node->root = this;
 
@@ -37,7 +37,7 @@ public:
         tail = new_node;
     }
 
-    DisjointSet* find_set(T value) {
+    DisjointSet* FindSet(T value) {
         node<T>* temp = this->head;
         while (temp != nullptr) {
             if (temp->data == value) {
@@ -48,11 +48,11 @@ public:
         return nullptr;
     }
 
-    DisjointSet* find_set(node<T>* target) {
+    DisjointSet* FindSet(node<T>* target) {
         return target->root;
     }
 
-    DisjointSet& getUnion(DisjointSet<T> other) {
+    DisjointSet& GetUnion(DisjointSet<T> other) {
         this->tail->next = other->head;
         node<T>* temp = other->head;
         while (temp != nullptr) {
