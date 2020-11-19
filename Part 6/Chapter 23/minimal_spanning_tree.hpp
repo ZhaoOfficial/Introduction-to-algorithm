@@ -1,7 +1,9 @@
+#ifndef MINIMUM_SPANNINING_TREE_HPP
+#define MINIMUM_SPANNINING_TREE_HPP
+
 #include <iostream>
 #include <cassert>
-#include "../Chapter 22/DenseGraph.hpp"
-#include "../Chapter 22/SparseGraph.hpp"
+#include "../Chapter 22/Edge.hpp"
 
 using std::cin;
 using std::cout;
@@ -14,8 +16,9 @@ namespace MyGraph {
     class MinimumSpanniningTree {
     private:
         Graph G;
+
     public:
-        MinimumSpanniningTree(Graph &G) : G(G) {
+        MinimumSpanniningTree(Graph &G) : G(G), minSum(0) {
             assert(!G.isDirected());        
         }
 
@@ -28,7 +31,7 @@ namespace MyGraph {
         }
 
 
-
+        // 
         void dijkstra(int startIndex) {
 
         }
@@ -36,3 +39,4 @@ namespace MyGraph {
     };
 };
 
+#endif // MINIMUM_SPANNINING_TREE_HPP

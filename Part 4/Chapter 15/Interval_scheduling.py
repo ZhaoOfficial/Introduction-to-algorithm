@@ -1,5 +1,6 @@
 n = 7
 startTime = [1, 3, 0, 4, 3, 5, 6, 8]
+# we arrange it with the ascending end time
 endTime = [4, 5, 6, 7, 8, 9, 10, 11]
 value = [5, 1, 8, 4, 6, 3, 2, 4]
 

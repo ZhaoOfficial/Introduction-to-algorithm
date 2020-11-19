@@ -1,5 +1,6 @@
 #ifndef GRAPHBASICS_TRAVERSE_HPP
 #define GRAPHBASICS_TRAVERSE_HPP
+
 #include <iostream>
 #include <cassert>
 #include <deque>
@@ -25,6 +26,7 @@ namespace MyGraph {
         }
         ~Traverse() {}
 
+        // O(|V| + |E|)
         void depthFirstSearch() {
             bool *isVisited = new bool[this->G.V()]{false};
             
@@ -52,6 +54,7 @@ namespace MyGraph {
             delete[] isVisited;
         }
 
+        // O(|V| + |E|)
         void breadthFirstSearch() {
             bool *isVisited = new bool[this->G.V()]{false};
             
@@ -62,6 +65,7 @@ namespace MyGraph {
 
             while (!queue.empty()) {
                 int current = queue.front();
+                queue.pop_front();
                 typename Graph::adjIterator adj(this->G, current);
 
                 for (auto it = adj.begin(); it != adj.end(); adj.next(it)) {
@@ -71,7 +75,6 @@ namespace MyGraph {
                         cout << (*it)->endPoint() << ' ';
                     }
                 }
-                queue.pop_front();
             }
             cout << endl;
             delete [] isVisited;
@@ -130,8 +133,5 @@ namespace MyGraph {
     };
 
 };
-
-
-
 
 #endif // GRAPHBASICS_SPARSEGRAPH_HPP
