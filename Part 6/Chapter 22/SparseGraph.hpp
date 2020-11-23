@@ -74,7 +74,7 @@ namespace MyGraph {
                     it++;
                 }
                 (*it)->setWeight(weight);
-                if (startIndex != endIndex && !this->directed) {
+                if (startIndex != endIndex && !this->isDirected()) {
                     auto it = adjacentList[endIndex].begin();
                     while ((*it)->theOtherEndPoint(endIndex) != startIndex) {
                         it++;
@@ -90,26 +90,16 @@ namespace MyGraph {
                 it++;
             }
 
-            if (it == adjacentList[startIndex].end()) {
-                adjacentList[startIndex].push_back(new Edge<T>(startIndex, endIndex, weight));
-            }
-            else {
-                // it will insert before iterator.
-                adjacentList[startIndex].insert(it, new Edge<T>(startIndex, endIndex, weight));
-            }
+            // it will insert before iterator.
+            adjacentList[startIndex].insert(it, new Edge<T>(startIndex, endIndex, weight));
 
-            if (startIndex != endIndex && !directed) {
+            if (startIndex != endIndex && !this->isDirected()) {
                 auto it = adjacentList[endIndex].begin();
                 while (it != adjacentList[endIndex].end() && (*it)->theOtherEndPoint(endIndex) < startIndex) {
                     it++;
                 }
 
-                if (it == adjacentList[endIndex].end()) {
-                    adjacentList[endIndex].push_back(new Edge<T>(endIndex, startIndex, weight));
-                }
-                else {
-                    adjacentList[endIndex].insert(it, new Edge<T>(endIndex, startIndex, weight));
-                }
+                adjacentList[endIndex].insert(it, new Edge<T>(endIndex, startIndex, weight));
             }
 
             this->numOfEdges++;

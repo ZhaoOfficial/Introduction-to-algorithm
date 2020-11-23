@@ -38,11 +38,11 @@ namespace MyGraph {
 
         int V() const {
             return numOfVertices;
-        };
+        }
 
         int E() const {
             return numOfEdges;
-        };
+        }
 
         bool isDirected() const {
             return directed;
