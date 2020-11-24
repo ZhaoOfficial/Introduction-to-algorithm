@@ -52,11 +52,19 @@ public:
         return Weight < e.Weight;
     }
 
+    bool operator<(const Edge& e) const {
+        return Weight < e.Weight;
+    }
+
     bool operator<=(Edge& e) const {
         return Weight <= e.Weight;
     }
 
     bool operator>(Edge& e) const {
+        return Weight > e.Weight;
+    }
+
+    bool operator>(const Edge& e) const {
         return Weight > e.Weight;
     }
 
