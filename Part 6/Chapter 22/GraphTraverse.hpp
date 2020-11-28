@@ -103,7 +103,7 @@ namespace MyGraph {
             }
 
             vector<int> stack;
-            while (endIndex != this->source) {
+            while (endIndex != -1) {
                 stack.push_back(endIndex);
                 endIndex = from[endIndex];
             }
