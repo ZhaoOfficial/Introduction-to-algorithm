@@ -6,7 +6,7 @@
 #include <vector>
 #include <algorithm>
 #include <cassert>
-#include <locale>
+#include <limits>
 #include "Edge.hpp"
 
 using std::cin;
