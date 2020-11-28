@@ -5,7 +5,6 @@
 #include <cassert>
 #include <deque>
 #include <vector>
-#include <memory.h>
 
 using std::cout;
 using std::endl;
@@ -28,8 +27,7 @@ namespace MyGraph {
 
         // O(|V| + |E|)
         void depthFirstSearch() {
-            bool *isVisited = new bool[this->G.V()]{false};
-            
+            vector<bool> isVisited(this->G.V(), false);
             deque<int> stack;
             cout << "DFS with source " << this->source << ": ";
             stack.push_back(this->source);
@@ -56,8 +54,7 @@ namespace MyGraph {
 
         // O(|V| + |E|)
         void breadthFirstSearch() {
-            bool *isVisited = new bool[this->G.V()]{false};
-            
+            vector<bool> isVisited(this->G.V(), false);
             deque<int> queue;
             cout << "BFS with source " << this->source << ": ";
             queue.push_back(this->source);
@@ -77,18 +74,14 @@ namespace MyGraph {
                 }
             }
             cout << endl;
-            delete [] isVisited;
         }
 
         void path(int endIndex) {
-            bool *isVisited = new bool[G.V()]{false};
+            vector<bool> isVisited(this->G.V(), false);
             // distance from source
-            int *dist = new int[G.V()];
-            int *from = new int[G.V()];
+            vector<int> dist(this->G.V(), -1);
+            vector<int> from(this->G.V(), -1);
             
-            memset(dist, -1, sizeof(int) * G.V());
-            memset(from, -1, sizeof(int) * G.V());
-
             deque<int> queue;
             queue.push_back(this->source);
             isVisited[this->source] = true;
@@ -125,10 +118,7 @@ namespace MyGraph {
                 }
                 cout << endl;
             }
-            
-            delete [] isVisited;
-            delete [] dist;
-            delete [] from;
+
         }
     };
 
