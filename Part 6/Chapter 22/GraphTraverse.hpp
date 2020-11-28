@@ -108,12 +108,13 @@ namespace MyGraph {
                 endIndex = from[endIndex];
             }
 
-            if (stack.empty()) {
+            if (stack.size() == 1) {
                 cout << "No Path!" << endl;
             }
             else {
-                cout << "Start from source " << this->source << ": ";
-                for (auto it = stack.rbegin(); it != stack.rend(); it++) {
+                auto it = stack.rbegin();
+                cout << "Start from source " << *it << ": ";
+                for (it++; it != stack.rend(); it++) {
                     cout << *it << ' ';
                 }
                 cout << endl;
