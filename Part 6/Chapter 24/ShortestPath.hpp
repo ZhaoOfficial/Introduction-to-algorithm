@@ -27,6 +27,13 @@ public:
     ShortestPath(Graph &G) : G(G) {}
     ~ShortestPath() {}
 
+    // O(|V|) memory
+    // O(|V|^2 + |E|) time 
+    // if we use a binary heap to find
+    // the smallest unchecked vertex
+    // O(|V|ln|V| + |E|ln|V|)
+    // Fibonacci heap O(|E| + |V|ln|V|)
+
     void Dijkstra(int startIndex, int endIndex) {
 
         int n = this->G.V(), m = 1;
