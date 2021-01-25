@@ -2,7 +2,7 @@
 
 ## 22.1 图的表示 Representation
 
-### 22.1.1 邻接链表 Adjacent List
+### 22.1.1 邻接链表 Adjacency List
 
 - 性质：
 
@@ -11,7 +11,7 @@
 3. 不能快速判断两个顶点之间是否有边相连。
 4. 空间复杂度 $\Theta(|V|+|E|)$ 。
 
-### 22.1.2 邻接矩阵 Adjacent Matrix
+### 22.1.2 邻接矩阵 Adjacency Matrix
 
 - 性质：
 
@@ -36,7 +36,7 @@ def BFS(G, s):
     Q.push(s)
     while not Q.empty():					# |V|
         v = Q.pop()
-        for u in v.adj():					# 2|E|
+        for u in G.adj(v):					# 2|E|
             if u.isVisited == False:
                 u.isVisited = True
                 u.distanceFromSource = v.distanceFromSource + 1
@@ -57,7 +57,7 @@ def DFS(G):
         v.pushTime = 0
         v.popTime = 0
         v.prior = None
-    globalTime = 0							# globalTime can be ignore
+    globalTime = 0							# globalTime can be ignored
     for v in G.V():							# |V|
         if v.isVisited == False:
             DFS_VISIT(G, s)
@@ -69,7 +69,7 @@ def DFSVisit(G, s):
     v.isVisited = True
     for u in G.adj(v):						# 2|E|
         if u.isVisited == False:
-            u.prior = u
+            u.prior = v
             DFS_VISIT(G, u)
     globalTime += 1
     v.popTime = globalTime
@@ -117,15 +117,13 @@ def TopologySort(G):
 
 ## 22.5 强连通分量 Strong Connected Component
 
-pass
-
-
+bfs
 
 # Chapter 23 最小生成树 Minimal Spanning Tree
 
 ## 23.1 最小生成树的形成 Build
 
-有连通无向图 $G(V,E)$ 和权重函数 $w:E\to\mathbb R$ ，希望找出最小生成树。用贪心算法。以下为伪代码。
+有连通无向图 $G(V,E)$ 和权重函数 $w:E\to\mathbb R$ ，希望找出最小生成树。用贪心算法。
 
 ```python
 def GeneratingMST(G):
@@ -172,9 +170,10 @@ def KruskalHeap(G):
     subMST = []
     root = G.V().copy()							# |v|
     
-    MakeHeap(G.E())								# |E|log|E|
+    Q = MakeHeap(G.E())							# |E|log|E|
     # e is the smallest in G.E()
-    for e in G.E():								# |E|log|E|
+    while len(subMST) <= n:						# |E|log|E|
+        e = Q.pop()
         if FindRoot(e.u) != FindRoot(e.v):
             subMST.append(e)
             Merge(e.u, e.v)
@@ -187,7 +186,7 @@ def KruskalHeap(G):
 
    空间复杂度 $\Theta(|E|)$ 。
 
-2. binary heap
+2. heap
 
    时间复杂度 $\Theta(|E|log|E|)=\Theta(|E|log|V|)$。
 
@@ -210,7 +209,7 @@ def Prim(G, s):
     while not Q.empty():
         v = Q.Pop()									# |v|log|V|
         for u in G.adj(v):							# |E|log|V| or |E| FibHeap
-            if v.inHeap and weightFunc(u, v) < v.dist:
+            if u.inHeap and weightFunc(u, v) < v.dist:
                 u.prior = v
                 u.dist = weightFunc(u, v)
 ```
@@ -227,8 +226,6 @@ def Prim(G, s):
 
 空间复杂度 $\Theta(|V|)$ 。
 
-
-
 # Chapter 24 单源最短路径 Single Source Shortest Path
 
 ```python
@@ -237,14 +234,12 @@ def Initial(G, s):
         v.dist = math.inf
         v.prior = None
     s.dist = 0
-    
+
 def Relax(u, v, weightFunc = default):
     if u.dist > v.dist + weightFunc(u, v):
         u.dist = v.dist + weightFunc(u, v)
         u.prior = v
 ```
-
-
 
 ## 24.1 Bellman-Ford
 
@@ -253,7 +248,7 @@ def Relax(u, v, weightFunc = default):
 ```python
 def BellmanFord(G, s):
     Initial(G, s)
-    for i in range(1, G.V().size()):			# |V|
+    for i in range(1, G.V().size()):			# |V| - 1
         for e in G.E():							# |E|
             Relax(e.u, e.v)
             
@@ -267,8 +262,6 @@ def BellmanFord(G, s):
 时间复杂度 $\Theta(|V||E|)$ 。
 
 空间复杂度 $\Theta(|V|)$ 。
-
-
 
 ## 24.2 
 
@@ -290,6 +283,7 @@ def Dijkstra(G, s):
         path.append(v)
         for u in G.adj(v):		# |E|log|V| or |E| FibHeap
             Relax(u, v)
+    return path
 ```
 
 1. binary heap
@@ -301,8 +295,6 @@ def Dijkstra(G, s):
    时间复杂度 $\Theta(|V|log|V|+|E|)$ 。
 
 空间复杂度 $\Theta(|V|)$ 。
-
-
 
 # Chapter 25 所有结点对的最短路径 Pairs Shortest Path
 
@@ -324,11 +316,16 @@ def Floyd_Warshall(G):
     n = G.V().size()
     # infinty if G[i][j] not in G.E()
     dist = [[G[i][j] for i in range(n)] for j in range(n)]
+    post = [[j if (i, j) in G.E() else None for i in range(n)] for j in range(n)]
+    mid = [[None for i in range(n)] for j in range(n)]
     
     for k in range(n):
         for i in range(n):
             for j in range(n):
-    			d[i][j] = min(d[i][j], d[i][k] + d[k][j])
+    			if dist[i][j] > dist[i][k] + dist[k][j]:
+                    dist[i][j] = dist[i][k] + dist[k][j]
+                    post[i][j] =  post[i][k]
+                    mid[i][j] = k
                 
 ```
 
@@ -339,7 +336,6 @@ def Floyd_Warshall(G):
 ```python
 def Astar(G, s, t):
     for v in G.V():
-    	v.isVisit = False
         v.prior = None
         v.dist = math.inf
     path = []
@@ -347,22 +343,18 @@ def Astar(G, s, t):
     # sort with w(v) = v.dist + h(v, e)
     # w is weight function
     # h is heuristic function
-    Q = MakeHeap()
+    Q = MakeHeap(G.V())
     s.dist = 0
     Q.push(s)
     
-    currentDist = s.dist + h(s, e)
     v = Q.pop()
-    v.isVisit = True
     while v != e:
+    	path.append(v)
         for u in G.adj(v):
-            # Push u with w(u) = v.dist + d(v, u) + h(u, t)
-            # = u.dist + h(u, t)
-            if not u.isVisited:
-                u.isVisit = True
-                u.prior = v
-                u.dist += v.dist + w(u, v)
-            	Q.push(u)
+            # Push u with w(u) = v.dist + d(v, u) + h(u, e)
+            # = u.dist + h(u, e)
+            u.prior = v
+            u.dist = min(v.dist + w(v, u), u.dist)
         v = Q.pop()    
 ```
 

@@ -36,7 +36,7 @@ def check_bracket(brackets:str) -> bool:
             stack.append(i)
         elif i == '}' or i == ']' or i == ')' or i == '>':
             bracket = stack.pop()
-            # change hierachy
+            # change hierarchy
             if len(stack) != 0:
                 hierachy = check_hierachy(stack[-1])
             if not check_match(bracket, i):
