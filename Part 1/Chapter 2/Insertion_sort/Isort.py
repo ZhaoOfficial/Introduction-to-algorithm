@@ -1,11 +1,14 @@
-array = ['Place Holder', 5, 8, 9, 6, 7, 2, 3, 1, 4]
+import random
 
-for i in range(2, len(array)):
+array = [random.randint(0, 20) for i in range(20)]
+print(array)
+
+for i in range(1, len(array)):
     temp = array[i]
-    insertPoint = i - 1
-    while insertPoint >= 1 and array[insertPoint] > temp:
-        array[insertPoint + 1] = array[insertPoint]
-        insertPoint -= 1
-    array[insertPoint + 1] = temp
+    insert_point = i - 1
+    while insert_point >= 0 and array[insert_point] > temp:
+        array[insert_point + 1] = array[insert_point]
+        insert_point -= 1
+    array[insert_point + 1] = temp
 
 print(array)

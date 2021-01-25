@@ -1,22 +1,18 @@
 from math import inf
 import random
-array = ['Place Holder']
-for i in range(10,100000):
-    array.append(random.randint(10, 100000))
+
+array = [random.randint(0, 20) for i in range(20)]
+print(array)
+
 def merge(array:list, begin, middle, end):
-    n1 = middle - begin + 1
-    n2 = end - middle
-    L = ['Place Holder']
-    R = ['Place Holder']
-    for i in range(1, n1 + 1):
-        L.append(array[begin + i - 1])
-    for j in range(1, n2 + 1):
-        R.append(array[middle + j])
+    L = array[begin:middle]
+    R = array[middle:end]
     L.append(inf)
     R.append(inf)
-    i = 1
-    j = 1
-    for k in range(begin, end + 1):
+
+    i = 0
+    j = 0
+    for k in range(begin, end):
         if L[i] <= R[j]:
             array[k] = L[i]
             i += 1
