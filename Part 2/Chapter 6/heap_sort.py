@@ -103,14 +103,5 @@ def max_heap_pop(array:Array, index):
     max_heapify(array, index)
     return value
 
-# print(array.data)
-# push(array, 0)
-# print(array.data)
-# push(array, 17)
-# print(array.data)
-# pop(array, 1)
-# print(array.data)
-# build_min_heap(array)
-# print(array.data)
 heap_sort(array)
 print(array.data)
