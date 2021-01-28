@@ -1,5 +1,3 @@
-array = ['0', 1, 5, 3, 8, 7, 2, 4, 6]
-
 def partition1(array:list, low, high) -> int:
     pivot = array[high]
     i = low - 1
@@ -21,11 +19,11 @@ def partition2(array:list, low, high) -> int:
     l = low
     r = high
     while l < r:
-        while l < r and array[r] > pivot:
+        while l < r and array[r] >= pivot:
             r -= 1
         array[l] = array[r]
 
-        while l < r and array[l] < pivot:
+        while l < r and array[l] <= pivot:
             l += 1
         array[r] = array[l]
 
@@ -39,5 +37,18 @@ def quick_sort2(array:list, low, high):
         quick_sort2(array, mid + 1, high)
 
 
-quick_sort2(array, 1, len(array) - 1)
-print(array)
+import time
+import numpy as np
+
+a = np.random.randint(0, 1000, 100000)
+b = a.copy()
+
+t = time.process_time()
+quick_sort1(a, 0, len(a) - 1)
+print(time.process_time() - t)
+
+t = time.process_time()
+quick_sort2(b, 0, len(b) - 1)
+print(time.process_time() - t)
+
+print(np.allclose(a, b))
