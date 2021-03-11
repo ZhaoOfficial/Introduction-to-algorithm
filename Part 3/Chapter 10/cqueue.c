@@ -3,7 +3,7 @@
 
 #include "cqueue.h"
 
-#define MinStackSize 5
+#define MinQueueSize 5
 
 struct QueueRecord
 {
@@ -28,8 +28,8 @@ Queue CreateStack(int MaxElements)
 {
     Queue q;
 
-    if (MaxElements < MinStackSize)
-        MaxElements = MinStackSize;
+    if (MaxElements < MinQueueSize)
+        MaxElements = MinQueueSize;
     q = (Queue)malloc(sizeof(struct QueueRecord));
     if (q == NULL)
     {
