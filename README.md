@@ -1,6 +1,4 @@
 # Introduction to Algorithm
-Implementations of *"Introduction to Algorithm"* by CPlusPlus and Python.
+Self implementations of *"Introduction to Algorithm"* by C/C++ and Python.
 
 The same order as *"Introduction to Algorithm"*.
-
-Self-made.
