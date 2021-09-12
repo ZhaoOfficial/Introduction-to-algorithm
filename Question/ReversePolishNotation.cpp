@@ -151,7 +151,7 @@ bool Calculate(vector<char>& Origin, vector<double>& Polish) {
 				Polish.push_back(second / first);
 			}
 			else {
-				printf("Error: devide 0.\n");
+				printf("Error: divide 0.\n");
 				return false;
 			}
 			break;

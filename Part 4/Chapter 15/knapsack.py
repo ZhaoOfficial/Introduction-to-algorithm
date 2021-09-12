@@ -1,9 +1,9 @@
 # 0 - 1 package
 
 n = 5
+Max_weight = 11
 value = [0, 1, 6, 18, 22, 28]
 weight = [0, 1, 2, 5, 6, 7]
-Max_weight = 11
 
 def package(n, upperWeight):
     if n == 0:

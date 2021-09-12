@@ -1,10 +1,5 @@
-t = True
-f = False
-a = 'and'
-o = 'or'
-
-TFList = [t, f, t, f]
-op = [o, o, a]
+TFList = [True, False, True, False]
+op = ['or', 'or', 'and']
 
 n = len(TFList)
 

@@ -17,7 +17,8 @@ def intervalScheduling(startTime, endTime, value, n):
         while index > -1 and endTime[index] > startTime[n]:
             index -= 1
         
-        array[n] = max(intervalScheduling(startTime, endTime, value, index) + value[n], intervalScheduling(startTime, endTime, value, n - 1))
+        array[n] = max(intervalScheduling(startTime, endTime, value, index)
+            + value[n], intervalScheduling(startTime, endTime, value, n - 1))
     
     return array[n]
 

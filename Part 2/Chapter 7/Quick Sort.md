@@ -1,12 +1,12 @@
 # Chapter 7 Quick Sort
 
-## 7.1
+## 7.1 描述
 
 快速排序是利用了分治思想。具体是选定一个轴，把比轴小的都放一边，比轴大的放另一边，此时可以不用处理顺序。最后轴放在两堆数的中间，此时轴处于最后排序好数组中所在的位置。
 
 对于长度为 $n$ 的数组来说，上述步骤的时间复杂度为 $\Theta(n)$。
 
-## 7.2
+## 7.2 性能
 
 如果每次只能划分出去 1 个元素，则递归式会变成：
 $$
@@ -20,7 +20,7 @@ T(n)=T(\frac{a}{a+b}n)+T(\frac{b}{a+b}n)+\Theta(n)
 $$
 解得 $T(n)=\Theta(n\log n)$。
 
-## 7.4
+## 7.4 时间复杂度分析
 
 ### 7.4.1 最坏情况分析
 
@@ -77,7 +77,11 @@ $$
 
 故：
 $$
-Pr\{a_i\text{ compared with }a_j\}=Pr\{a_i\text{ is the pivot}\}+Pr\{a_i\text{ is the pivot}\}=\frac{2}{j-i+1}
+\begin{align*}
+&\qquad Pr\{a_i\text{ compared with }a_j\}\\
+&=Pr\{a_i\text{ is the pivot of }A_{ij}\}+Pr\{a_j\text{ is the pivot of }A_{ij}\}\\
+&=\frac{2}{j-i+1}\\
+\end{align*}
 $$
 
 $$

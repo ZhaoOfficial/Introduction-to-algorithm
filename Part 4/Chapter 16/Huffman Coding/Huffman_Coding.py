@@ -111,8 +111,8 @@ class node(object):
         return result
 
 
-C = Array(['0', node(('a', 45)), node(('b', 13)), node(('c', 12)), 
-    node(('d', 16)), node(('e', 9)), node(('f', 5))])
+C = Array(['0', node(('12', 12)), node(('10', 10)), node(('7', 7)), 
+    node(('5', 5)), node(('4', 4)), node(('2', 2))])
 
 # O(nlogn)
 def Huffman(C):

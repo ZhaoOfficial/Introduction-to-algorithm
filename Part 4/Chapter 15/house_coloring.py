@@ -12,16 +12,9 @@ cost = [red, green, blue]
 total = [[0] * (n + 1) for j in range(3)]
 
 print(cost)
+for j in range(1, n + 1):
+    for i in range(3):
+        total[i][j] = cost[i][j] + min(total[(i - 1) % 3][j - 1], total[(i + 1) % 3][j - 1])
 
-def house_coloring(n):
-    global cost
-    global total
-
-    for j in range(1, n + 1):
-        for i in range(3):
-            total[i][j] = cost[i][j] + min(total[(i - 1) % 3][j - 1], total[(i + 1) % 3][j - 1])
-
-    print(total)
-    print(min(total[0][n], total[1][n], total[2][n]))
-
-house_coloring(n)
+print(total)
+print(min(total[0][n], total[1][n], total[2][n]))

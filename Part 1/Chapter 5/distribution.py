@@ -208,7 +208,7 @@ if __name__ == "__main__":
     p = 0.3
     generated_data = np.asarray([Discrete.Bern(p) for _ in range(time)])
 
-    index = np.arange(0, 2, dtype = np.float)
+    index = np.arange(0, 2, dtype = float)
     pmf = np.asarray([np.sum(generated_data == False), np.sum(generated_data == True)])
     cdf = np.cumsum(pmf)
     theoreticalPMF = np.asarray([(1 - p) * time, p * time])
@@ -220,7 +220,7 @@ if __name__ == "__main__":
     p = 0.4
     n = 20
     generated_data = np.asarray([Discrete.Bin(n, p) for _ in range(time)])
-    index = np.arange(0, n + 1, dtype = np.float)
+    index = np.arange(0, n + 1, dtype = float)
 
     pmf = np.asarray([np.sum(generated_data == index[i]) for i in range(n + 1)])
     cdf = np.cumsum(pmf)
@@ -233,7 +233,7 @@ if __name__ == "__main__":
     p = 0.5
     generated_data = np.asarray([Discrete.Geom(p) for _ in range(time)])
     n = np.max(generated_data)
-    index = np.arange(0, n + 1, dtype = np.float)
+    index = np.arange(0, n + 1, dtype = float)
 
     pmf = np.asarray([np.sum(generated_data == index[i]) for i in range(n + 1)])
     cdf = np.cumsum(pmf)
@@ -246,7 +246,7 @@ if __name__ == "__main__":
     p = 0.1
     generated_data = np.asarray([Discrete.FS(p) for _ in range(time)])
     n = np.max(generated_data)
-    index = np.arange(1, n + 1, dtype = np.float)
+    index = np.arange(1, n + 1, dtype = float)
 
     pmf = np.asarray([np.sum(generated_data == index[i - 1]) for i in range(1, n + 1)])
     cdf = np.cumsum(pmf)
@@ -260,7 +260,7 @@ if __name__ == "__main__":
     r = 10
     generated_data = np.asarray([Discrete.NBin(r, p) for _ in range(time)])
     n = np.max(generated_data)
-    index = np.arange(1, n + 1, dtype = np.float)
+    index = np.arange(1, n + 1, dtype = float)
 
     pmf = np.asarray([np.sum(generated_data == index[i - 1]) for i in range(1, n + 1)])
     cdf = np.cumsum(pmf)
@@ -274,7 +274,7 @@ if __name__ == "__main__":
     b = 30
     n = 20
     generated_data = np.asarray([Discrete.HGeom(w, b, n) for _ in range(time)])
-    index = np.arange(0, n + 1, dtype = np.float)
+    index = np.arange(0, n + 1, dtype = float)
 
     pmf = np.asarray([np.sum(generated_data == index[i]) for i in range(n + 1)])
     cdf = np.cumsum(pmf)
@@ -287,7 +287,7 @@ if __name__ == "__main__":
     L = 100
     generated_data = np.asarray([Discrete.Pois(L) for _ in range(time)])
     n = np.max(generated_data)
-    index = np.arange(0, n + 1, dtype = np.float)
+    index = np.arange(0, n + 1, dtype = float)
 
     pmf = np.asarray([np.sum(generated_data == index[i]) for i in range(n + 1)])
     cdf = np.cumsum(pmf)

@@ -1,6 +1,6 @@
 import random
 
-number = [random.randint(1,15) for i in range(50)]
+number = [random.randint(1, 15) for i in range(50)]
 n = len(number)
 target = 50
 
